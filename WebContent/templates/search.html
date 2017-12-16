@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Account View</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="static/bootstrap/css/bootstrap.css" rel="stylesheet"
+	type="text/css" />
+	<link href="static/bootstrap/css/themify-icons/themify-icons.css" rel="stylesheet">
+	<script src="static/bootstrap/js/bootstrap.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+	<script src="https://unpkg.com/vue"></script>
+	<link rel="stylesheet" href="https://unpkg.com/vue-nav-tabs/themes/vue-tabs.css">
+	<script src="https://unpkg.com/vue-nav-tabs/dist/vue-tabs.js"></script>
+	<!-- Date-picker dependency-->
+	<script src="https://unpkg.com/jquery@3.2.1/dist/jquery.min.js"></script>
+	<script src="https://unpkg.com/moment@2.18.1/min/moment.min.js"></script>
+	<link href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Date-picker itself -->
+	<script src="https://unpkg.com/eonasdan-bootstrap-datetimepicker@4.17.47/build/js/bootstrap-datetimepicker.min.js"></script>
+	<link href="https://unpkg.com/eonasdan-bootstrap-datetimepicker@4.17.47/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+	<!-- Lastly add this package -->
+	<script src="https://unpkg.com/vue-bootstrap-datetimepicker"></script>
+  </head>
+  <style>
+  .modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    padding-top: 5px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+}
+
+th{
+	text-align: center !important;
+}
+.modal-content {
+    margin: auto;
+    width: 65%;
+}
+.close {
+    color: grey;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+input[type=submit] {
+    cursor:pointer;
+	width:100%;
+	border:none;
+	background:grey;
+	color:#FFF;
+	margin-bottom: 5px;
+	padding:10px;
+	font-size:15px;
+	font-family: Quicksand;
+	letter-spacing: 2px;
+	text-shadow: none;
+	box-shadow: none;
+	margin-top: 10px;
+}
+
+input[type=submit]:hover {
+    background:black;
+	-webkit-transition:background 0.3s ease-in-out;
+	-moz-transition:background 0.3s ease-in-out;
+	transition:background-color 0.3s ease-in-out;
+}
+
+input[type=text], select {
+    width: 100%; 
+	padding: 12px;  
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; 
+    resize: vertical;
+}
+
+.FormContainer {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+	padding-bottom: 20px;
+    max-width:1000px;
+    margin:0 auto;
+    position:relative;
+	font-family: Quicksand;
+}
+.FormContainer label{
+	color: #000000;
+}
+
+.FormContainer span {
+	color: #000000;
+}
+
+.FormContainer h1{
+	text-align: center;
+}
+
+.halfLeft {
+	width: 50%;
+	float: left;
+	padding-right: 12px;  
+	padding-left: 12px;  
+	padding-bottom: 5px;  
+	box-sizing: border-box; 
+	resize: vertical;
+}
+
+.halfRight {
+	width: 50%;
+	float: right;
+	padding-right: 12px;  
+	padding-left: 12px;  
+	padding-bottom: 5px;  
+	box-sizing: border-box; 	
+	resize: vertical;
+}
+
+  </style>
+   <body>
+  <div id="header-wrapper" style="padding: 0 !important;">
+	    <ul class="top-nav">
+  <li><a href="/welcome">HOME</a></li>
+  <li><a href="/contacts">CONTACTS</a></li>
+  <li><a href="/account">ACCOUNT VIEW</a></li>      
+  <li><a href="/database">INVENTORY MANAGEMENT</a></li>
+  <li style="float:right"><a href="/login">LOGOUT</a></li>
+</ul>
+  </div>
+				<table style="width:100% !important">
+					<tr>
+						<th colspan="10">List of Shows</th>
+					<tr>
+						<th>Show Id</th>
+						<th>Name</th>
+						<th>Start Date</th>
+						<th>End Date</th>
+						<th>Client</th>
+						<th>Job Type</th>
+						<th>Status</th>
+						<th>Handler</th>
+						<th>Sales Person</th>
+						<th>Created By</th>
+					</tr>
+						{% for Shows in information %}
+					<tr>
+						<td>{{ Shows.idShows }}</td>
+						<td><div class="show-names">
+							<button v-on:click="addShowTab('{{ Shows.show }}')">{{ Shows.show }}</button>
+						</div>
+						</td>
+						<td>{{ Shows.start_date }}</td>
+						<td>{{ Shows.end_date }}</td>
+						<td>{{ Shows.client }}</td>
+						<td>{{ Shows.job_type }}</td>
+						<td>{{ Shows.status }}</td>
+						<td>{{ Shows.handler }}</td>
+						<td>{{ Shows.salesperson }}</td>
+						<td>{{ Shows.created_by }}</td>
+					</tr>
+						{% endfor %}
+					</table>
+</body>
+</html>

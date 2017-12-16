@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Update an Item</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Quicksand" />
+	<script src="https://unpkg.com/vue"></script>
+	<link rel="stylesheet" href="https://unpkg.com/vue-nav-tabs/themes/vue-tabs.css">
+		<script src="https://unpkg.com/vue-nav-tabs/dist/vue-tabs.js"></script>
+	<style>
+input[type=text], select {
+    width: 100%; 
+    padding: 12px;  
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; 
+    margin-top: 6px; 
+    margin-bottom: 16px; 
+    resize: vertical;
+}
+
+input[type=submit] {
+    cursor:pointer;
+	width:100%;
+	border:none;
+	background:grey;
+	color:#FFF;
+	margin:0 0 5px;
+	padding:10px;
+	font-size:15px;
+	font-family: Quicksand;
+	letter-spacing: 2px;
+}
+
+input[type=submit]:hover {
+    background:black;
+	-webkit-transition:background 0.3s ease-in-out;
+	-moz-transition:background 0.3s ease-in-out;
+	transition:background-color 0.3s ease-in-out;
+}
+
+.updateFormContainer {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    max-width:650px;
+    margin:0 auto;
+    position:relative;
+	font-family: Quicksand;
+}
+.updateFormContainer label, span {
+	color: #000000;
+}
+.updateFormContainer h1, p{
+	text-align: center;
+}
+</style>
+  </head>
+   <body>
+  <div class="updateFormContainer">
+  <h1>Update an Item!</h1>
+      <p>Click <a href="/welcome">here</a> to go back to the Home page.</p>
+      <p>Click <a href="/database">here</a> to go back to the Item list page.</p>
+  <form action="/database/update/{{updateItem.idItems}}" method="POST">
+  	<label for="idItems">ID Item</label>
+    <input type="text" id="updatedidItems" name="updatedidItems" value="{{updateItem.idItems}}">
+    <label for="name">Name</label>
+    <input type="text" id="updatedName" name="updatedName" value="{{updateItem.name}}" required>
+    <label for="quantity">Quantity</label>
+	<div id="dropdown">
+    <input type="text" id="updatedQuantity" name="updatedQuantity" value="{{updateItem.quantity}}" required>
+	<label for="mastercategory">Master Category</label>
+	<select id="updatedMaster_Category" name="updatedMaster_Category" value="{{updateItem.mastercategory}}" v-model="master_category" required>
+    <option v-for="(item, index) in list">{% raw %}{{ index }}{% endraw %}</option>
+  </select>
+	<label for="subcategory">Sub Category</label>
+	<select id="updatedSub_Category" name="updatedSub_Category" value="{{updateItem.subcategory}}" v-model="sub_category" required>
+    <option v-for="option in list[master_category]">{% raw %}{{option.sub_category}}{% endraw %}</option>
+  </select>
+	</div>
+	<label for="pictures">Pictures</label>
+    <input type="text" id="updatedPictures" name="updatedPictures" value="{{updateItem.pictures}}">
+	<label for="code">Barcode</label>
+	<select id="updatedBarcode" name="updatedBarcode" value="{{updateItem.code}}">
+		<option value="Yes">Yes</option>
+		<option value="No">No</option>
+	</select>
+    <input type="submit" value="Submit">
+  </form>
+  </div>
+  <script type="text/javascript" src="../../static/js/javascript.js"></script>
+  </body>
+</html>
